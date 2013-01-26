@@ -37,6 +37,6 @@ Run the unit tests
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 me?
 
 Distributed under the Eclipse Public License, the same as Clojure.
