@@ -9,16 +9,13 @@
 
 (def rules [ruleA ruleB ruleC ruleD])
 
-
-
 (deftest should-test-totals
   (defn price [goods]  
     (def checkout (->Checkout rules []))
-    (def items (update-in checkout [:basket ] replace (mapv 
-                                                        #(first (-> (scan checkout %) :basket)) 
-                                                        (re-seq #"." goods) )))
-    (total items)
-    )
+    (def items (update-in checkout [:basket ] 
+                          replace (mapv #(first (-> (scan checkout %) :basket)) 
+                                        (re-seq #"." goods) )))
+    (total items))
   
   (testing "Should test totals of products"
     (is (= 0 (price "")))
@@ -44,5 +41,5 @@
     (is (= 80 (total (swap! checkout scan "B"))))
     (is (= 130 (total (swap! checkout scan "A"))))
     (is (= 160 (total (swap! checkout scan "A"))))
-    (is (= 175 (total (swap! checkout scan "B"))))
-    ))
+    (is (= 175 (total (swap! checkout scan "B")))))
+  (reset! checkout (atom (->Checkout rules [] ))))
